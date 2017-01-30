@@ -1,0 +1,23 @@
+<li class="editing">
+##    <form id="edit-form" ic-put-to="/todos/$vehicle.chassisnumber" ic-get-from="/" ic-trigger-on="resetEscape">
+##        <input id="todo-edit" name="vehicle-chassisnumber" class="edit" value="$vehicle.chassisnumber" autofocus>
+##        <input id="todo-edit" name="vehicle-make" class="edit" value="$vehicle.make" autofocus>
+##        <input id="todo-edit" name="vehicle-model" class="edit" value="$vehicle.model" autofocus>
+##        <input id="todo-edit" name="vehicle-colour" class="edit" value="$vehicle.colour" autofocus>
+##        <input id="todo-edit" name="vehicle-capacity" class="edit" value="$vehicle.capacity" autofocus>
+##    </form>
+
+    <form id="edit-form" ic-get-from="/">
+        <label for="vehicle-chassisnumber">Chassis Number</label>
+        <input name="vehicle-chassisnumber" class="edit" id="todo-edit" value="#if( ! $vehicle.chassisnumber )#end" placeholder="Chassis Number...">
+        <label for="vehicle-make">Make</label>
+        <input name="vehicle-make" class="edit" id="todo-edit" value="#if( ! $vehicle.make )#end" placeholder="Make...">
+        <label for="vehicle-model">Model</label>
+        <input name="vehicle-model" class="edit" id="todo-edit" value="#if( ! $vehicle.model )#end" placeholder="Model...">
+        <label for="vehicle-colour">Colour</label>
+        <input name="vehicle-colour" class="edit" id="todo-edit" value="#if( ! $vehicle.colour )#end" placeholder="Colour...">
+        <label for="vehicle-capacity">Capacity</label>
+        <input name="vehicle-capacity" class="edit" id="todo-edit" value="#if( ! $vehicle.capacity )#end" placeholder="Capacity...">
+        <button id="form-button-1" ic-put-to="/vehicles/$vehicle.chassisnumber">Submit</button>
+    </form>
+</li>

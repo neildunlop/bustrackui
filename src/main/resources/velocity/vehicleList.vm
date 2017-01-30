@@ -1,0 +1,34 @@
+<header ic-include='{"status":"$status"}'>
+    <h1>Vehicles</h1>
+    <form id="todo-form" ic-post-to="/vehicles">
+        <input id="new-todo" placeholder="Enter a chassis number..." name="vehicle-chassisnumber" pattern=".{4,}" required title="> 3 chars" autofocus>
+    </form>
+</header>
+
+<section id="main">
+    <ul id="vehicle-list">
+        #foreach($vehicle in $vehicles)
+            <li>
+                <div class="view">
+                    <input type="checkbox" class="toggle" ic-put-to="/vehicles/$vehicle.chassisnumber/toggle_status" #if($todo.complete)checked#end>
+                    <label ic-get-from="/vehicles/$vehicle.chassisnumber/edit" ic-target="closest li" ic-trigger-on="dblclick" ic-replace-target="true">$vehicle.chassisnumber</label>
+                    <button class="destroy" ic-delete-from="/vehicles/$vehicle.chassisnumber"></button>
+                </div>
+            </li>
+        #end
+    </ul>
+</section>
+
+<footer>
+    <span id="todo-count">
+        <strong>$activeCount</strong> items left
+    </span>
+    <ul id="filters" ic-push-url="true"> ##maintains history
+        <li #if($filter == "")        class="selected"#end ic-get-from="/">All</li>
+        <li #if($filter == "active")  class="selected"#end ic-get-from="/?status=active">Active</li>
+        <li #if($filter == "complete")class="selected"#end ic-get-from="/?status=complete">Completed</li>
+    </ul>
+    #if($anyCompleteTodos)
+        <button id="clear-completed" ic-delete-from="/vehicles/completed" ic-include='{"status":"$status"}'>Clear completed</button>
+    #end
+</footer>
